@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@material-ui/core": "^4.9.10",
+    "formik": "^2.1.4",
+    "prop-types": "^15.7.2"
+  }
+}
