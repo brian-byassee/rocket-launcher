@@ -4,3 +4,7 @@
   min-height: 500px;
   width: 100%;
 }
+
+.LaunchAnimation .rocket-icon {
+  transform: scale(0.1);
+}
