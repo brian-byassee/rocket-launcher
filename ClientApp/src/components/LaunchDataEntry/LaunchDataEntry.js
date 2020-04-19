@@ -12,9 +12,9 @@ const LaunchDataEntry = ({ onLaunch }) => (
     {({ handleSubmit }) => (
       <form onSubmit={handleSubmit}>
         <div className="LaunchDataEntry">
-          <Field type="number" id="mass" name="mass" render={({ field }) => <TextField {...field} label="Mass" />} />
-          <Field type="number" id="angle" name="angle" render={({ field }) => <TextField {...field} label="Angle" />} />
-          <Field type="text" id="force" name="force" render={({ field }) => <TextField {...field} label="Force" />} />
+          <Field id="mass" name="mass" render={({ field }) => <TextField {...field} type="number" label="Mass" />} />
+          <Field id="angle" name="angle" render={({ field }) => <TextField {...field} type="number" label="Angle" />} />
+          <Field id="force" name="force" render={({ field }) => <TextField {...field} type="number" label="Force" />} />
           <Button className="submit-button" type="submit" color="primary">
             Launch
           </Button>

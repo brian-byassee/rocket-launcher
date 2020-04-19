@@ -2,10 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './styles.css';
 
-const LaunchAnimation = () => <div className="LaunchAnimation">Launch Animation</div>;
+const LaunchAnimation = ({ mass, angle, force }) => (
+  <div className="LaunchAnimation">
+    <div className="title">Launch Animation</div>
+    <div>
+      {mass}
+      {angle}
+      {force}
+    </div>
+  </div>
+);
 
 LaunchAnimation.propTypes = {
-  rocketMass: PropTypes.number.isRequired,
+  mass: PropTypes.number.isRequired,
   angle: PropTypes.number.isRequired,
   force: PropTypes.number.isRequired,
 };
