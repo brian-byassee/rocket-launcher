@@ -16,7 +16,7 @@ const RocketLaunchContent = () => {
 
   return (
     <div className="RocketLaunchContent">
-      {!isLoggedIn && <Login />}
+      {!isLoggedIn && <Login setIsLoggedIn={setIsLoggedIn} />}
       {isLoggedIn && (
         <div className="row">
           <div className="col-xs-9 col-md-8">
