@@ -9,6 +9,11 @@ const RocketLaunchContent = () => {
   const [angle, setAngle] = useState(0);
   const [force, setForce] = useState(0);
 
+  const onLaunch = (values) => {
+    console.log(values);
+    console.log('Rocket has launched....');
+  };
+
   return (
     <div className="RocketLaunchContent">
       {!isLoggedIn && <Login />}
@@ -18,7 +23,7 @@ const RocketLaunchContent = () => {
             <LaunchAnimation rocketMass={rocketMass} angle={angle} force={force} />
           </div>
           <div className="col-xs-3 col-md-4">
-            <LaunchDataEntry setRocketMass={setRocketMass} setAngle={setAngle} setForce={setForce} />
+            <LaunchDataEntry onLaunch={onLaunch} />
           </div>{' '}
         </div>
       )}
