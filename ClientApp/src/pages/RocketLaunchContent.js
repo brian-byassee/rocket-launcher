@@ -4,7 +4,7 @@ import { LaunchDataEntry } from '../components/LaunchDataEntry';
 import { LaunchAnimation } from '../components/LaunchAnimation';
 
 const RocketLaunchContent = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [rocketMass, setRocketMass] = useState(0);
   const [angle, setAngle] = useState(0);
   const [force, setForce] = useState(0);

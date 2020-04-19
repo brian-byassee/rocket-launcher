@@ -1,8 +1,17 @@
 import React from 'react';
 
-const Login = () => {
-  
-  return (<div>Hello from login component</div>)
+const Login = ({setIsLoggedIn}) => {
+  const handleSubmit = async (event) => {
+  	event.preventDefault();
+    const resp = await fetch(`Login`);
+    console.log(await resp);
+    setIsLoggedIn(resp.data);
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+    <button>Add card</button>
+  </form>)
 
 };
 

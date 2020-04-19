@@ -7,7 +7,8 @@ namespace rocket_launch.Controllers
     [HttpGet]
     public bool Get()
     {
-      return true;
+      var thing = true;
+      return thing;
     }
   }
 }
