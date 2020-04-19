@@ -23,6 +23,7 @@ const RocketLaunchContent = () => {
       {isLoggedIn && (
         <div className="row">
           <div className="col-xs-9 col-md-8">
+            Mass = {mass} Angle = {angle} Force = {force}
             <LaunchAnimation mass={mass} angle={angle} force={force} />
           </div>
           <div className="col-xs-3 col-md-4">
