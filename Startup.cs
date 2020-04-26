@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using rocket_launch.DataAccess;
 
 namespace rocket_launch
 {
@@ -21,6 +22,7 @@ namespace rocket_launch
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddSingleton<UserProfileRepository>();
             services.AddControllersWithViews();
 
             // In production, the React files will be served from this directory

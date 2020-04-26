@@ -3,8 +3,7 @@ import Login from '../components/Login';
 import { LaunchDataEntry } from '../components/LaunchDataEntry';
 import { LaunchAnimation } from '../components/LaunchAnimation';
 
-const RocketLaunchContent = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+const RocketLaunchContent = ({user, setUser, isLoggedIn, setIsLoggedIn}) => {
   const [mass, setMass] = useState(0);
   const [angle, setAngle] = useState(0);
   const [force, setForce] = useState(0);
@@ -19,7 +18,7 @@ const RocketLaunchContent = () => {
 
   return (
     <div className="RocketLaunchContent">
-      {!isLoggedIn && <Login setIsLoggedIn={setIsLoggedIn} />}
+      {!isLoggedIn && <Login setIsLoggedIn={setIsLoggedIn} setUser={setUser} />}
       {isLoggedIn && (
         <div className="row">
           <div className="col-xs-9 col-md-8">

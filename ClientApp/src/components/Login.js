@@ -1,18 +1,20 @@
 import React from 'react';
+import { CreateProfile } from './CreateProfile';
 
-const Login = ({setIsLoggedIn}) => {
-  const handleSubmit = async (event) => {
-  	event.preventDefault();
-    const resp = await fetch(`Login`);
-    console.log(await resp);
-    setIsLoggedIn(resp.data);
-  }
+const axios = require('axios').default;
+
+const Login = ({ setIsLoggedIn, setUser }) => {
+
+  const handleSubmit = async values => {
+    const { firstName, lastName } = values;
+    console.log(values);
+    const resp = await axios.post('login', values);
+    setIsLoggedIn(false);
+  };
 
   return (
-    <form onSubmit={handleSubmit}>
-    <button>Add card</button>
-  </form>)
-
+    <CreateProfile setIsLoggedIn={setIsLoggedIn} setUser={setUser}/>
+  );
 };
 
 export default Login;
