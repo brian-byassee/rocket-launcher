@@ -1,0 +1,11 @@
+.RocketLaunchContent .input-fields {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 500px;
+}
+
+.RocketLaunchContent .button-row {
+  
+  padding-top: 15px;
+}

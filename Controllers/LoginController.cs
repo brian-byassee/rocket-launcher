@@ -13,8 +13,13 @@ namespace rocket_launch.Controllers
     {
       _userProfileRepository = userProfileRepository;
     }
+    [HttpGet]
+    public UserProfile SignIn([FromQuery] string password, [FromQuery] string userName)
+    {
+      return _userProfileRepository.GetExistingProfile(userName, password);
+    }
     [HttpPost]
-    public bool CreateProfile([FromBody] UserProfile userProfile)
+    public UserProfile CreateProfile([FromBody] UserProfile userProfile)
     {
       return _userProfileRepository.AddUserProfile(userProfile);
     }
