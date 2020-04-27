@@ -18,6 +18,12 @@ namespace rocket_launch.Controllers
     {
       return _userProfileRepository.GetExistingProfile(userName, password);
     }
+    [HttpGet]
+    [Route("{userName}")]
+    public bool ValidateUserName([FromRoute] string userName)
+    {
+      return _userProfileRepository.CheckIfUserNameExists(userName);
+    }
     [HttpPost]
     public UserProfile CreateProfile([FromBody] UserProfile userProfile)
     {
