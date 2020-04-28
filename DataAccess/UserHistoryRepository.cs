@@ -5,10 +5,19 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using rocket_launch.Models;
 
 namespace rocket_launch.DataAccess
 {
   public class UserHistoryRepository
   {
+    public List<HistoryRecord> GetHistoryRecords(string userName, int recordCount, int startLocation)
+    {
+      return new List<HistoryRecord>();
+    }
+    public bool RecordLaunch(HistoryRecord hr)
+    {
+      return true;
+    }
   }
 }

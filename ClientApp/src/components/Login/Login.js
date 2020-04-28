@@ -23,7 +23,7 @@ const loginValidation = Yup.object().shape({
       .test(
         'check-userName',
         'User name already taken',
-        debounce(async value => !(await axios.get(`login/${value}`)).data, 1000)
+        debounce(async value => !(await axios.get(`login/${value}`)).data, 400)
       ),
     otherwise: Yup.string()
       .max(20, 'Max 20 characters')
