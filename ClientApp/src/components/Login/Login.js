@@ -13,12 +13,13 @@ const loginValidation = Yup.object().shape({
   createAccount: Yup.bool(),
   password: Yup.string()
     .max(20, 'Max 20 characters')
+    .min(5, 'Minimum 5 character')
     .required('Required'),
   userName: Yup.string().when('createAccount', {
     is: true,
     then: Yup.string()
       .max(20, 'Max 20 characters')
-      .required('Email is required')
+      .required('User Name is required')
       .test(
         'check-userName',
         'User name already taken',
@@ -70,9 +71,12 @@ const Login = ({ setIsLoggedIn, setUser }) => {
     const resp = createAccount.isNew
       ? await axios.post('login', values)
       : await axios.get('login', { params: { password: values.password, userName: values.userName } });
-    console.log(resp.data);
-    setUser(resp.data);
-    setIsLoggedIn(true);
+    if (!resp.data) {
+      alert("Invalid user name or password")
+    } else {
+      setUser(resp.data);
+      setIsLoggedIn(true);
+    }
   };
 
   return (
@@ -82,6 +86,7 @@ const Login = ({ setIsLoggedIn, setUser }) => {
         lastName: '',
         email: '',
         password: '',
+        passwordConfirm: '',
         userName: '',
         createAccount: createAccount.isNew,
       }}
@@ -108,6 +113,7 @@ const Login = ({ setIsLoggedIn, setUser }) => {
                   <TextField
                     {...field}
                     label="Password"
+                    type="password"
                     helperText={touched.password ? errors.password : ''}
                     error={errors.password && Boolean(touched.password)}
                     variant="outlined"
@@ -121,6 +127,7 @@ const Login = ({ setIsLoggedIn, setUser }) => {
                       <TextField
                         {...field}
                         label="Confirm Password"
+                        type="password"
                         helperText={touched.passwordConfirm ? errors.passwordConfirm : ''}
                         error={errors.passwordConfirm && Boolean(touched.passwordConfirm)}
                         variant="outlined"

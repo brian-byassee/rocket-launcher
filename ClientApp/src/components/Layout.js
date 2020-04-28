@@ -1,10 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Container } from 'reactstrap';
 import { NavMenu } from './NavMenu';
 
-export const Layout = (props) => (
+export const Layout = props => (
   <div>
-    <NavMenu isLoggedIn={props.isLoggedIn} firstName={props.firstName}/>
+    <NavMenu
+      isLoggedIn={props.isLoggedIn}
+      firstName={props.firstName}
+      setUser={props.setUser}
+      setIsLoggedIn={props.setIsLoggedIn}
+    />
     <Container>{props.children}</Container>
   </div>
 );
