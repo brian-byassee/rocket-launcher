@@ -7,7 +7,7 @@ import './custom.css';
 
 const App = () => {
   const [user, setUser] = useState({ firstName: '', lastName: '', email: '', password: '', userName: '' });
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   return (
     <Layout isLoggedIn={isLoggedIn} firstName={user.firstName} setUser={setUser} setIsLoggedIn={setIsLoggedIn}>

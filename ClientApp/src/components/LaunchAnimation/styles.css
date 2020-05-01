@@ -3,6 +3,13 @@
   min-width: 500px;
   min-height: 500px;
   width: 100%;
+  background: #eaeaea;
+  position: relative;
+}
+
+.LaunchAnimation .animation-window {
+  width: 500px;
+  height: 500px;
 }
 
 .LaunchAnimation .rocket-icon {
