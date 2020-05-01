@@ -11,7 +11,7 @@ namespace rocket_launch.DataAccess
 {
   public class UserHistoryRepository
   {
-    public List<HistoryRecord> GetHistoryRecords(string userName, int recordCount, int startLocation)
+    public List<HistoryRecord> GetHistoryRecords(string userName)
     {
       return new List<HistoryRecord>();
     }

@@ -16,9 +16,9 @@ namespace rocket_launch.Controllers
     }
     [HttpGet]
     [Route("{userName}")]
-    public List<HistoryRecord> GetHistory([FromRoute] string userName, [FromQuery] int recordCount, [FromQuery] int startLocation)
+    public List<HistoryRecord> GetHistory([FromRoute] string userName)
     {
-      return _userHistoryRepository.GetHistoryRecords(userName, recordCount, startLocation);
+      return _userHistoryRepository.GetHistoryRecords(userName);
     }
     [HttpPost]
     [Route("{userName}")]
