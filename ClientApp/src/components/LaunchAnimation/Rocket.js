@@ -32,6 +32,7 @@ const Rocket = ({ width, height, launchSuccessFail, launchStatus }) => {
   });
 
   const failureProps = useSpring({
+    config: { duration: 1000 },
     to: async (next, cancel) => {
       await next({
         position: "absolute",
