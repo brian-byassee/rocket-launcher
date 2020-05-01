@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using rocket_launch.DataAccess;
 using rocket_launch.Models;
@@ -25,9 +26,9 @@ namespace rocket_launch.Controllers
       return _userProfileRepository.CheckIfUserNameExists(userName);
     }
     [HttpPost]
-    public UserProfile CreateProfile([FromBody] UserProfile userProfile)
+    public async Task<UserProfile> CreateProfile([FromBody] UserProfile userProfile)
     {
-      return _userProfileRepository.AddUserProfile(userProfile);
+      return await _userProfileRepository.AddUserProfile(userProfile);
     }
   }
 }
