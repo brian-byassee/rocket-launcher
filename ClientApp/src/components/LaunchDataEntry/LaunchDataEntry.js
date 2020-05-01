@@ -7,7 +7,7 @@ import { getInitialValues } from './form';
 
 import './styles.css';
 
-const LaunchDataEntry = ({ onLaunch }) => (
+const LaunchDataEntry = ({ onLaunch, onReset }) => (
   <Formik initialValues={getInitialValues()} onSubmit={onLaunch}>
     {({ handleSubmit }) => (
       <form onSubmit={handleSubmit}>
@@ -18,6 +18,9 @@ const LaunchDataEntry = ({ onLaunch }) => (
           <Button className="submit-button" type="submit" color="primary">
             Launch
           </Button>
+          <Button className="reset-button" type="button" onClick={onReset} color="primary">
+            Reset
+          </Button>
         </div>
       </form>
     )}
@@ -26,6 +29,7 @@ const LaunchDataEntry = ({ onLaunch }) => (
 
 LaunchDataEntry.propTypes = {
   onLaunch: PropTypes.func.isRequired,
+  onReset: PropTypes.func.isRequired,
 };
 
 LaunchDataEntry.defaultProps = {};

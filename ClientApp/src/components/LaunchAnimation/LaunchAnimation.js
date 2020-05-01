@@ -1,25 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useSpring, animated } from 'react-spring';
-import rocket from './rocket-solid.svg';
+import AutoSizer from "react-virtualized-auto-sizer";
+
+import Rocket from './Rocket';
+
 
 import './styles.css';
 
-const LaunchAnimation = ({ mass, angle, force }) => (
+const LaunchAnimation = ({ launchSuccessFail, launchStatus }) => (
   <div className="LaunchAnimation">
-    <div className="title">Launch Animation</div>
-    <div>
-      <animated.div style={useSpring({ config: { duration: 5000 }, opacity: 1, from: { opacity: 0 } })}>
-        <img className="rocket-icon" src={rocket} />
-      </animated.div>
+    <div className="animation-window">
+      <AutoSizer>
+        {({ width, height }) => {
+          return <Rocket width={width} height={height} launchStatus={launchStatus} launchSuccessFail={launchSuccessFail} />
+        }}
+      </AutoSizer>
     </div>
   </div>
 );
 
 LaunchAnimation.propTypes = {
-  mass: PropTypes.number.isRequired,
-  angle: PropTypes.number.isRequired,
-  force: PropTypes.number.isRequired,
+  launchSuccessFail: PropTypes.string.isRequired,
+  launchStatus: PropTypes.string.isRequired,
 };
 
 LaunchAnimation.defaultProps = {};
