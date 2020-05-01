@@ -5,26 +5,28 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRocket } from "@fortawesome/free-solid-svg-icons";
 
 const Rocket = ({ width, height, launchSuccessFail, launchStatus }) => {
-  console.log(width, height);
   const successProps = useSpring({
     to: async (next, cancel) => {
       await next({
+        duration: 2000,
         position: "absolute",
-        bottom: height / 2,
-        left: width / 2,
+        bottom: 350,
+        left: 350,
         transform: "rotate(45deg)"
       });
       await next({
+        duration: 2000,
         position: "absolute",
-        bottom: 0,
-        left: width,
+        bottom: 450,
+        left: 450,
         transform: "rotate(90deg)"
       });
     },
     from: {
+      duration: 2000,
       position: "absolute",
-      bottom: 0,
-      left: 0,
+      bottom: 300,
+      left: 300,
       transform: "rotate(45deg)"
     }
   });
@@ -33,18 +35,24 @@ const Rocket = ({ width, height, launchSuccessFail, launchStatus }) => {
     to: async (next, cancel) => {
       await next({
         position: "absolute",
-        bottom: height / 2,
-        left: width / 2,
+        bottom: 350,
+        left: 350,
         transform: "rotate(45deg)"
       });
       await next({
         position: "absolute",
-        bottom: 0,
-        left: width,
-        transform: "rotate(90deg"
+        bottom: 500,
+        left: 500,
+        transform: "rotate(90deg)"
       });
+    },
+    from: {
+      position: "absolute",
+      bottom: 300,
+      left: 300,
+      transform: "rotate(45deg)"
     }
-  })
+  });
 
   return (
     <div className="Rocket" >
