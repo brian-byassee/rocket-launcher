@@ -33,12 +33,11 @@ const RocketLaunchContent = ({ user, setUser, isLoggedIn, setIsLoggedIn }) => {
       {isLoggedIn && (
         <div className="row">
           <div className="col-xs-9 col-md-8">
-            Mass = {mass} Angle = {angle} Force = {force}
             <LaunchAnimation launchSuccessFail={launchSuccessFail} launchStatus={launchStatus} />
           </div>
           <div className="col-xs-3 col-md-4">
             <LaunchDataEntry onLaunch={onLaunch} onReset={onReset} />
-          </div>{' '}
+          </div>
         </div>
       )}
     </div>
