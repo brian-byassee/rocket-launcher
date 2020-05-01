@@ -1,17 +1,32 @@
 .LaunchAnimation {
   border: 1px solid black;
-  min-width: 500px;
-  min-height: 500px;
-  width: 100%;
-  background: #eaeaea;
+  width: 600px;
+  height: 600px;
+  background: #2c2e2f;
   position: relative;
+  background-image: url(./earth.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 400px 400px;
 }
 
 .LaunchAnimation .animation-window {
-  width: 500px;
-  height: 500px;
+  width: 600px;
+  height: 600px;
 }
 
 .LaunchAnimation .rocket-icon {
   transform: scale(0.1);
+}
+
+.LaunchAnimation .grounded-rocket .svg-inline--fa {
+  color: white;
+  font-size: 1.4em;
+  margin-left: 300px;
+  margin-top: 250px;
+}
+
+.LaunchAnimation .launched-rocket .svg-inline--fa {
+  color: white;
+  font-size: 1.4em;
 }

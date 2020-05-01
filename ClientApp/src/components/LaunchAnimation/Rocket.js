@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRocket } from "@fortawesome/free-solid-svg-icons";
 
 const Rocket = ({ width, height, launchSuccessFail, launchStatus }) => {
+  console.log(width, height);
   const successProps = useSpring({
     to: async (next, cancel) => {
       await next({
@@ -46,14 +47,18 @@ const Rocket = ({ width, height, launchSuccessFail, launchStatus }) => {
   })
 
   return (
-    <div className="Rocket">
-      {launchStatus === 'grounded' && <FontAwesomeIcon icon={faRocket} />}
-      {launchStatus === 'launched' && (
-        <animated.div style={launchStatus === 'success' ? successProps : failureProps}>
-          <FontAwesomeIcon icon={faRocket} />
-        </animated.div>
-      )}
-    </div>
+    <div className="Rocket" >
+      {launchStatus === 'grounded' && <div className="grounded-rocket"><FontAwesomeIcon icon={faRocket} /></div>}
+      {
+        launchStatus === 'launched' && (
+          <animated.div style={launchStatus === 'success' ? successProps : failureProps}>
+            <div className="launched-rocket">
+              <FontAwesomeIcon icon={faRocket} />
+            </div>
+          </animated.div>
+        )
+      }
+    </div >
   );
 };
 
