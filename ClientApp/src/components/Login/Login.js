@@ -1,3 +1,4 @@
+//Created File
 import React, { useState } from 'react';
 import { Formik, Field } from 'formik';
 import { Button, Col, Row } from 'reactstrap';
@@ -8,7 +9,7 @@ import './styles.css';
 
 const axios = require('axios').default;
 var debounce = require('lodash.debounce');
-
+//Object used to validate user input for login/create account page
 const loginValidation = Yup.object().shape({
   createAccount: Yup.bool(),
   password: Yup.string()
@@ -55,6 +56,7 @@ const loginValidation = Yup.object().shape({
   }),
 });
 
+//function used to render Login content
 const Login = ({ setIsLoggedIn, setUser }) => {
   const [createAccount, setCreateAccount] = useState({ isNew: false, switch: 'Create Account', submit: 'Sign In' });
 

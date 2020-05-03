@@ -1,3 +1,5 @@
+//Modified from computer generated code
+
 import React from 'react';
 import { Container, Navbar, Button } from 'reactstrap';
 import './NavMenu.css';

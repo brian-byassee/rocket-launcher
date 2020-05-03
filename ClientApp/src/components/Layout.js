@@ -1,3 +1,4 @@
+//Modified from computer generated code
 import React from 'react';
 import { Container } from 'reactstrap';
 import { NavMenu } from './NavMenu';

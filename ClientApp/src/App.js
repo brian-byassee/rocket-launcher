@@ -1,3 +1,4 @@
+//Modified from computer generated code
 import React, { useState } from 'react';
 import { Route } from 'react-router';
 import { Layout } from './components/Layout';
@@ -7,7 +8,7 @@ import './custom.css';
 
 const App = () => {
   const [user, setUser] = useState({ firstName: '', lastName: '', email: '', password: '', userName: '' });
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <Layout isLoggedIn={isLoggedIn} firstName={user.firstName} setUser={setUser} setIsLoggedIn={setIsLoggedIn}>

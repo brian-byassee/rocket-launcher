@@ -1,6 +1,6 @@
+//Modified from computer generated code
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,8 +25,8 @@ namespace rocket_launch
     {
 
       services.AddScoped<UserProfileRepository>();
-      services.AddDbContext<UserProfileContext>(options =>
-          options.UseSqlite(Configuration.GetConnectionString("UserProfileContext")));
+      services.AddDbContext<RocketLauncherContext>(options =>
+          options.UseSqlite(Configuration.GetConnectionString("RocketLauncherContext")));
       services.AddControllersWithViews();
 
       // In production, the React files will be served from this directory
