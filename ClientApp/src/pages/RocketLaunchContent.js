@@ -3,25 +3,39 @@ import React, { useState } from 'react';
 import { Login } from '../components/Login';
 import { LaunchDataEntry } from '../components/LaunchDataEntry';
 import { LaunchAnimation } from '../components/LaunchAnimation';
+import { LaunchHistoryTable } from '../components/LaunchHistoryTable';
+
+const axios = require('axios').default;
 
 const RocketLaunchContent = ({ user, setUser, isLoggedIn, setIsLoggedIn }) => {
   const [mass, setMass] = useState(0);
   const [angle, setAngle] = useState(0);
   const [force, setForce] = useState(0);
-  const [launchSuccessFail, setLaunchSuccessFail] = useState();
+  const [launchSuccessful, setLaunchSuccessful] = useState(false);
   const [launchStatus, setLaunchStatus] = useState('grounded');
 
-  const calculateSuccessFail = () => {
-    const launchStatus = mass > 0 && angle > 0 && force > 0 ? 'success' : 'failure';
-    setLaunchSuccessFail(launchStatus);
-  }
+  const calculateSuccessFail = (mass, angle, force) => {
+    const launchStatus = mass > 0 && angle > 0 && force > 0;
+    setLaunchSuccessful(launchStatus);
+    return launchStatus;
+  };
 
-  const onLaunch = (values) => {
+  const onLaunch = async values => {
     const { mass, angle, force } = values;
     setMass(mass);
     setAngle(angle);
     setForce(force);
-    calculateSuccessFail();
+    var success = calculateSuccessFail(mass, angle, force);
+    const resp = await axios.post('history', {
+      email: user.email,
+      mass: mass,
+      angle: angle,
+      force: force,
+      success: success,
+    });
+    if (!resp.data) {
+      alert('failed to save rocket launch data!');
+    }
     setLaunchStatus('launched');
     console.log('Rocket has launched....');
   };
@@ -33,11 +47,12 @@ const RocketLaunchContent = ({ user, setUser, isLoggedIn, setIsLoggedIn }) => {
       {!isLoggedIn && <Login setIsLoggedIn={setIsLoggedIn} setUser={setUser} />}
       {isLoggedIn && (
         <div className="row">
-          <div className="col-xs-9 col-md-8">
-            <LaunchAnimation launchSuccessFail={launchSuccessFail} launchStatus={launchStatus} />
+          <div className="col-xs-9 col-md-7">
+            <LaunchAnimation launchSuccessful={launchSuccessful} launchStatus={launchStatus} />
           </div>
-          <div className="col-xs-3 col-md-4">
+          <div className="col-xs-3 col-md-5">
             <LaunchDataEntry onLaunch={onLaunch} onReset={onReset} />
+            <LaunchHistoryTable email={user.email}/>
           </div>
         </div>
       )}

@@ -1,4 +1,5 @@
 //Created File
+using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using rocket_launch.DataAccess;
@@ -16,20 +17,47 @@ namespace rocket_launch.Controllers
       _userProfileRepository = userProfileRepository;
     }
     [HttpGet]
-    public UserProfile SignIn([FromQuery] string password, [FromQuery] string userName)
+    public UserProfile SignIn([FromQuery] string password, [FromQuery] string email)
     {
-      return _userProfileRepository.GetExistingProfile(userName, password);
+      UserProfile userProfile = new UserProfile();
+      try
+      {
+        userProfile = _userProfileRepository.GetExistingProfile(email, password);
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine(ex);
+      }
+      return userProfile;
     }
     [HttpGet]
-    [Route("{userName}")]
-    public bool ValidateUserName([FromRoute] string userName)
+    [Route("{email}")]
+    public bool ValidateEmail([FromRoute] string email)
     {
-      return _userProfileRepository.CheckIfUserNameExists(userName);
+      bool isValidEmail = false;
+      try
+      {
+        isValidEmail = _userProfileRepository.CheckIfEmailExists(email);
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine(ex);
+      }
+      return isValidEmail;
     }
     [HttpPost]
     public async Task<UserProfile> CreateProfile([FromBody] UserProfile userProfile)
     {
-      return await _userProfileRepository.AddUserProfile(userProfile);
+      UserProfile newUserProfile = new UserProfile();
+      try
+      {
+        newUserProfile = await _userProfileRepository.AddUserProfile(userProfile);
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine(ex);
+      }
+      return newUserProfile;
     }
   }
 }

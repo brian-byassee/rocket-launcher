@@ -24,7 +24,8 @@ namespace rocket_launch
     public void ConfigureServices(IServiceCollection services)
     {
 
-      services.AddScoped<UserProfileRepository>();
+      services.AddTransient<UserProfileRepository>();
+      services.AddTransient<UserHistoryRepository>();
       services.AddDbContext<RocketLauncherContext>(options =>
           options.UseSqlite(Configuration.GetConnectionString("RocketLauncherContext")));
       services.AddControllersWithViews();

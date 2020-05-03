@@ -1,18 +1,27 @@
 //Created File
 using System.Collections.Generic;
+using System.Linq;
 using rocket_launch.Models;
 
 namespace rocket_launch.DataAccess
 {
   public class UserHistoryRepository
   {
-    public List<HistoryRecord> GetHistoryRecords(string userName)
+    private static RocketLauncherContext _context;
+    public UserHistoryRepository(RocketLauncherContext context)
     {
-      return new List<HistoryRecord>();
+      _context = context;
     }
-    public bool RecordLaunch(HistoryRecord hr)
+    public List<HistoryRecord> GetHistoryRecords(string email)
     {
-      return true;
+      var thing = _context.HistoryRecords.Where(hr => hr.Email == email).ToList();
+      return thing;
+    }
+    public async System.Threading.Tasks.Task<bool> RecordLaunchAsync(HistoryRecord hr)
+    {
+      _context.HistoryRecords.Add(hr);
+      var entryCount = await _context.SaveChangesAsync();
+      return entryCount > 0;
     }
   }
 }

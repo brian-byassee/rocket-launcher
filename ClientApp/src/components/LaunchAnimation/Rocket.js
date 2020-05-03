@@ -5,7 +5,7 @@ import { useSpring, animated } from 'react-spring';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRocket } from "@fortawesome/free-solid-svg-icons";
 
-const Rocket = ({ width, height, launchSuccessFail, launchStatus }) => {
+const Rocket = ({ width, height, launchSuccessful, launchStatus }) => {
   const successProps = useSpring({
     to: async (next, cancel) => {
       await next({
@@ -61,7 +61,7 @@ const Rocket = ({ width, height, launchSuccessFail, launchStatus }) => {
       {launchStatus === 'grounded' && <div className="grounded-rocket"><FontAwesomeIcon icon={faRocket} /></div>}
       {
         launchStatus === 'launched' && (
-          <animated.div style={launchStatus === 'success' ? successProps : failureProps}>
+          <animated.div style={launchSuccessful ? successProps : failureProps}>
             <div className="launched-rocket">
               <FontAwesomeIcon icon={faRocket} />
             </div>
@@ -75,7 +75,7 @@ const Rocket = ({ width, height, launchSuccessFail, launchStatus }) => {
 Rocket.propTypes = {
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
-  launchSuccessFail: PropTypes.string.isRequired,
+  launchSuccessful: PropTypes.bool.isRequired,
   launchStatus: PropTypes.string.isRequired,
 }
 

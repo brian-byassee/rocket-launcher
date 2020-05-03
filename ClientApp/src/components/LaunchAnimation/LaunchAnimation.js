@@ -9,12 +9,12 @@ import Rocket from './Rocket';
 
 import './styles.css';
 
-const LaunchAnimation = ({ launchSuccessFail, launchStatus }) => (
+const LaunchAnimation = ({ launchSuccessful, launchStatus }) => (
   <div className="LaunchAnimation">
     <div className="animation-window">
       <AutoSizer>
         {({ width, height }) => {
-          return <Rocket width={width} height={height} launchStatus={launchStatus} launchSuccessFail={launchSuccessFail} />
+          return <Rocket width={width} height={height} launchStatus={launchStatus} launchSuccessful={launchSuccessful} />
         }}
       </AutoSizer>
     </div>
@@ -22,7 +22,7 @@ const LaunchAnimation = ({ launchSuccessFail, launchStatus }) => (
 );
 
 LaunchAnimation.propTypes = {
-  launchSuccessFail: PropTypes.string.isRequired,
+  launchSuccessful: PropTypes.bool.isRequired,
   launchStatus: PropTypes.string.isRequired,
 };
 

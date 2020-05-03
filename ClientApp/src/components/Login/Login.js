@@ -20,15 +20,7 @@ const loginValidation = Yup.object().shape({
     is: true,
     then: Yup.string()
       .max(20, 'Max 20 characters')
-      .required('User Name is required')
-      .test(
-        'check-userName',
-        'User name already taken',
-        debounce(async value => !(await axios.get(`login/${value}`)).data, 400)
-      ),
-    otherwise: Yup.string()
-      .max(20, 'Max 20 characters')
-      .required('Required'),
+      .required('User Name is required'),
   }),
   passwordConfirm: Yup.string().when('createAccount', {
     is: true,
@@ -52,6 +44,11 @@ const loginValidation = Yup.object().shape({
     is: true,
     then: Yup.string()
       .email('Enter a valid email')
+      .test(
+        'check-email',
+        'Email already taken',
+        debounce(async value => !(await axios.get(`login/${value}`)).data, 400)
+      )
       .required('Email is required'),
   }),
 });
@@ -72,9 +69,9 @@ const Login = ({ setIsLoggedIn, setUser }) => {
   const handleSubmit = async values => {
     const resp = createAccount.isNew
       ? await axios.post('login', values)
-      : await axios.get('login', { params: { password: values.password, userName: values.userName } });
+      : await axios.get('login', { params: { password: values.password, email: values.email } });
     if (!resp.data) {
-      alert("Invalid user name or password")
+      alert('Invalid user name or password');
     } else {
       setUser(resp.data);
       setIsLoggedIn(true);
@@ -99,14 +96,14 @@ const Login = ({ setIsLoggedIn, setUser }) => {
         <form onSubmit={handleSubmit}>
           <Row className="justify-content-md-center">
             <div className="input-fields">
-              <Field id="userName" name="userName">
+              <Field id="email" name="email">
                 {({ field }) => (
                   <TextField
                     {...field}
-                    helperText={touched.userName ? errors.userName : ''}
-                    error={errors.userName && Boolean(touched.userName)}
+                    label="Email"
+                    helperText={touched.email ? errors.email : ''}
+                    error={errors.email && Boolean(touched.email)}
                     variant="outlined"
-                    label="User Name"
                   />
                 )}
               </Field>
@@ -158,14 +155,14 @@ const Login = ({ setIsLoggedIn, setUser }) => {
                       />
                     )}
                   </Field>
-                  <Field id="email" name="email">
+                  <Field id="userName" name="userName">
                     {({ field }) => (
                       <TextField
                         {...field}
-                        label="Email"
-                        helperText={touched.email ? errors.email : ''}
-                        error={errors.email && Boolean(touched.email)}
+                        helperText={touched.userName ? errors.userName : ''}
+                        error={errors.userName && Boolean(touched.userName)}
                         variant="outlined"
+                        label="User Name"
                       />
                     )}
                   </Field>

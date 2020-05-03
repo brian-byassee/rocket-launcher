@@ -1,4 +1,5 @@
 //Created File
+using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using rocket_launch.DataAccess;
@@ -15,17 +16,35 @@ namespace rocket_launch.Controllers
     {
       _userHistoryRepository = userHistoryRepository;
     }
+    
     [HttpGet]
-    [Route("{userName}")]
-    public List<HistoryRecord> GetHistory([FromRoute] string userName)
+    [Route("{email}")]
+    public List<HistoryRecord> GetHistory([FromRoute] string email)
     {
-      return _userHistoryRepository.GetHistoryRecords(userName);
+      List<HistoryRecord> historyRecords = new List<HistoryRecord>();
+      try
+      {
+        historyRecords = _userHistoryRepository.GetHistoryRecords(email);
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine(ex);
+      }
+      return historyRecords;
     }
     [HttpPost]
-    [Route("{userName}")]
-    public bool RecordLaunch([FromBody] HistoryRecord historyRecord)
+    public async System.Threading.Tasks.Task<bool> RecordLaunchAsync([FromBody] HistoryRecord historyRecord)
     {
-      return _userHistoryRepository.RecordLaunch(historyRecord);
+      bool savedRocketLaunch = false;
+      try
+      {
+        savedRocketLaunch = await _userHistoryRepository.RecordLaunchAsync(historyRecord);
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine(ex);
+      }
+      return savedRocketLaunch;
     }
   }
 }

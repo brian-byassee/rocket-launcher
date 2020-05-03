@@ -6,11 +6,11 @@ namespace rocket_launch.Models
 {
   public class HistoryRecord
   {
-    [Key]
+    public int ID { get; set; }
     public string Email { get; set; }
     public bool Success { get; set; }
-    public int Mass { get; set; }
-    public int Angle { get; set; }
-    public int Force { get; set; }
+    public float Mass { get; set; }
+    public float Angle { get; set; }
+    public float Force { get; set; }
   }
 }

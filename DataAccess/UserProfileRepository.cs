@@ -12,9 +12,9 @@ namespace rocket_launch.DataAccess
     {
       _context = context;
     }
-    public UserProfile GetExistingProfile(string userName, string password)
+    public UserProfile GetExistingProfile(string email, string password)
     {
-      var up =_context.UserProfiles.SingleOrDefault(up => up.Password.Equals(password) && up.UserName.Equals(userName));
+      var up =_context.UserProfiles.SingleOrDefault(up => up.Password.Equals(password) && up.Email.Equals(email));
       return up;
     }
     public async Task<UserProfile> AddUserProfile(UserProfile up)
@@ -23,9 +23,9 @@ namespace rocket_launch.DataAccess
       await _context.SaveChangesAsync();
       return up;
     }
-    public bool CheckIfUserNameExists(string userName)
+    public bool CheckIfEmailExists(string email)
     {
-      var thing = _context.UserProfiles.Any(up => up.UserName == userName);
+      var thing = _context.UserProfiles.Any(up => up.Email == email);
       return thing;
     }
   }
