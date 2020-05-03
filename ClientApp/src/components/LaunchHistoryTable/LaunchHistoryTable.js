@@ -18,7 +18,6 @@ const LaunchHistoryTable = ({ email }) => {
 
   const handleClick = evt => {
     evt.preventDefault();
-    console.log('hi');
     if (!showTable) {
       getHistoryRecords(email, setHistoryData);
     }
@@ -26,7 +25,10 @@ const LaunchHistoryTable = ({ email }) => {
   };
 
   return (
-    <React.Fragment>
+    <div className="LaunchHistoryTable">
+      <Button onClick={handleClick} className="history-button" color="primary">
+        {showTable ? 'Hide launch history' : 'Get launch history'}
+      </Button>
       {showTable && (
         <div className="launch-history-table">
           <h3>Launch History!</h3>
@@ -52,10 +54,7 @@ const LaunchHistoryTable = ({ email }) => {
           </Table>
         </div>
       )}
-      <Button onClick={handleClick} className="history-button" color="primary">
-        {showTable ? 'Hide launch history' : 'Get launch history'}
-      </Button>
-    </React.Fragment>
+    </div>
   );
 };
 

@@ -44,11 +44,14 @@ const loginValidation = Yup.object().shape({
     is: true,
     then: Yup.string()
       .email('Enter a valid email')
+      .required('Email is required')
       .test(
         'check-email',
         'Email already taken',
         debounce(async value => !(await axios.get(`login/${value}`)).data, 400)
-      )
+      ),
+    otherwise: Yup.string()
+      .email('Enter a valid email')
       .required('Email is required'),
   }),
 });

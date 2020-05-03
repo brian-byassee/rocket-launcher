@@ -4,7 +4,6 @@ import { Login } from '../components/Login';
 import { LaunchDataEntry } from '../components/LaunchDataEntry';
 import { LaunchAnimation } from '../components/LaunchAnimation';
 import { LaunchHistoryTable } from '../components/LaunchHistoryTable';
-
 const axios = require('axios').default;
 
 const RocketLaunchContent = ({ user, setUser, isLoggedIn, setIsLoggedIn }) => {
@@ -52,7 +51,7 @@ const RocketLaunchContent = ({ user, setUser, isLoggedIn, setIsLoggedIn }) => {
           </div>
           <div className="col-xs-3 col-md-5">
             <LaunchDataEntry onLaunch={onLaunch} onReset={onReset} />
-            <LaunchHistoryTable email={user.email}/>
+            <LaunchHistoryTable className="launch-history-table" email={user.email}/>
           </div>
         </div>
       )}
