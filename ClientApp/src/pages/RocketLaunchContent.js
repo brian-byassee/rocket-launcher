@@ -1,5 +1,7 @@
 //Created File
 import React, { useState } from 'react';
+import useWindowSize from '../common/useWindowSize';
+import Confetti from 'react-confetti'
 import { Login } from '../components/Login';
 import { LaunchDataEntry } from '../components/LaunchDataEntry';
 import { LaunchAnimation } from '../components/LaunchAnimation';
@@ -15,7 +17,7 @@ const heightAlgorithm = (mass, force, angle) => {
   const C1 =
     (-1 * exhaustGasSpeed * beta * (beta - airResistance) - gravity * mass * airResistance) /
     (airResistance * (beta - airResistance) * Math.pow(mass, airResistance / beta));
-  const C2 = ((gravity * Math.pow(mass, 2)) / (2 * beta * (beta - airResistance))) + (C1 * Math.pow(mass, 1 + (airResistance/beta))) / (beta * (1 + (airResistance / beta)));
+  const C2 = ((gravity * Math.pow(mass, 2)) / (2 * beta * (beta - airResistance))) + (C1 * Math.pow(mass, 1 + (airResistance / beta))) / (beta * (1 + (airResistance / beta)));
   const firstPiece = ((exhaustGasSpeed * beta) / airResistance) * t;
   const secondPiece = (gravity / (2 * beta * (beta - airResistance))) * Math.pow(mass - beta * t, 2);
   const thirdPiece = (C1 / (beta * (1 + (airResistance / beta)))) * Math.pow(mass - (beta * t), 1 + (airResistance / beta))
@@ -30,6 +32,7 @@ const RocketLaunchContent = ({ user, setUser, isLoggedIn, setIsLoggedIn }) => {
   const [force, setForce] = useState(0);
   const [launchSuccessful, setLaunchSuccessful] = useState(false);
   const [launchStatus, setLaunchStatus] = useState('grounded');
+  const [animating, setAnimating] = useState(false);
 
   const calculateSuccessFail = (mass, angle, force) => {
     heightAlgorithm(mass, force, angle);
@@ -40,17 +43,19 @@ const RocketLaunchContent = ({ user, setUser, isLoggedIn, setIsLoggedIn }) => {
 
   const onLaunch = async values => {
     const { mass, angle, force } = values;
+    setAnimating(true);
     setMass(mass);
     setAngle(angle);
     setForce(force);
     var success = calculateSuccessFail(mass, angle, force);
     const resp = await axios.post('history', {
       email: user.email,
-      mass: mass,
-      angle: angle,
-      force: force,
+      mass: Number(mass),
+      angle: Number(angle),
+      force: Number(force),
       success: success,
     });
+    setTimeout(() => setAnimating(false), 1000);
     if (!resp.data) {
       alert('failed to save rocket launch data!');
     }
@@ -60,12 +65,19 @@ const RocketLaunchContent = ({ user, setUser, isLoggedIn, setIsLoggedIn }) => {
 
   const onReset = () => setLaunchStatus('grounded');
 
+  const { width, height } = useWindowSize();
+
   return (
     <div className="RocketLaunchContent">
       {!isLoggedIn && <Login setIsLoggedIn={setIsLoggedIn} setUser={setUser} />}
       {isLoggedIn && (
         <div className="row">
           <div className="col-xs-9 col-md-7">
+            {launchSuccessful && launchStatus === 'launched' && !animating && (
+              <Confetti
+                width={width}
+                height={height} />
+            )}
             <LaunchAnimation launchSuccessful={launchSuccessful} launchStatus={launchStatus} />
           </div>
           <div className="col-xs-3 col-md-5">

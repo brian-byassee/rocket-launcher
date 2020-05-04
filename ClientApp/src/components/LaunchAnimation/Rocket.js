@@ -9,7 +9,7 @@ const Rocket = ({ width, height, launchSuccessful, launchStatus }) => {
   const successProps = useSpring({
     to: async (next, cancel) => {
       await next({
-        duration: 2000,
+        duration: 1000,
         position: "absolute",
         bottom: 350,
         left: 350,
