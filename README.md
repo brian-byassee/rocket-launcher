@@ -40,3 +40,5 @@ Many of these are similar to a using statement(libraries) in C# (think newtonsof
 [Launch Data Entry](ClientApp/src/components/LaunchDataEntry/LaunchDataEntry.js)<br>
 [Launch Animation](ClientApp/src/components/LaunchAnimation/LaunchAnimation.js)<br>
 
+### Earth Image
+https://pixabay.com/vectors/earth-world-globe-map-planet-23546/
