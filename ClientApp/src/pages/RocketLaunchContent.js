@@ -32,6 +32,7 @@ const RocketLaunchContent = ({ user, setUser, isLoggedIn, setIsLoggedIn }) => {
   const [force, setForce] = useState(0);
   const [launchSuccessful, setLaunchSuccessful] = useState(false);
   const [launchStatus, setLaunchStatus] = useState('grounded');
+  const [animating, setAnimating] = useState(false);
 
   const calculateSuccessFail = (mass, angle, force) => {
     heightAlgorithm(mass, force, angle);
@@ -42,6 +43,7 @@ const RocketLaunchContent = ({ user, setUser, isLoggedIn, setIsLoggedIn }) => {
 
   const onLaunch = async values => {
     const { mass, angle, force } = values;
+    setAnimating(true);
     setMass(mass);
     setAngle(angle);
     setForce(force);
@@ -53,6 +55,7 @@ const RocketLaunchContent = ({ user, setUser, isLoggedIn, setIsLoggedIn }) => {
       force: Number(force),
       success: success,
     });
+    setTimeout(() => setAnimating(false), 1000);
     if (!resp.data) {
       alert('failed to save rocket launch data!');
     }
@@ -70,7 +73,7 @@ const RocketLaunchContent = ({ user, setUser, isLoggedIn, setIsLoggedIn }) => {
       {isLoggedIn && (
         <div className="row">
           <div className="col-xs-9 col-md-7">
-            {launchSuccessful && launchStatus === 'launched' && (
+            {launchSuccessful && launchStatus === 'launched' && !animating && (
               <Confetti
                 width={width}
                 height={height} />
