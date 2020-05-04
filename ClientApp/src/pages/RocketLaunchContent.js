@@ -1,5 +1,7 @@
 //Created File
 import React, { useState } from 'react';
+import useWindowSize from '../common/useWindowSize';
+import Confetti from 'react-confetti'
 import { Login } from '../components/Login';
 import { LaunchDataEntry } from '../components/LaunchDataEntry';
 import { LaunchAnimation } from '../components/LaunchAnimation';
@@ -60,12 +62,19 @@ const RocketLaunchContent = ({ user, setUser, isLoggedIn, setIsLoggedIn }) => {
 
   const onReset = () => setLaunchStatus('grounded');
 
+  const { width, height } = useWindowSize();
+
   return (
     <div className="RocketLaunchContent">
       {!isLoggedIn && <Login setIsLoggedIn={setIsLoggedIn} setUser={setUser} />}
       {isLoggedIn && (
         <div className="row">
           <div className="col-xs-9 col-md-7">
+            {launchSuccessful && launchStatus === 'launched' && (
+              <Confetti
+                width={width}
+                height={height} />
+            )}
             <LaunchAnimation launchSuccessful={launchSuccessful} launchStatus={launchStatus} />
           </div>
           <div className="col-xs-3 col-md-5">
