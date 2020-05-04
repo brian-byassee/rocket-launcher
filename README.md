@@ -35,7 +35,7 @@ Many of these are similar to a using statement(libraries) in C# (think newtonsof
 [History Record Object](Models/HistoryRecord.cs)<br>
 [User Profile Object](Models/UserProfile.cs)<br>
 ### GUI Interface files (React js)
-[Login Component](ClientApp/src/components/login/Login.js)<br>
+[Login Component](ClientApp/src/components/Login/Login.js)<br>
 [Launch History Table](ClientApp/src/components/LaunchHistoryTable/LaunchHistoryTable.js)<br>
 [Launch Data Entry](ClientApp/src/components/LaunchDataEntry/LaunchDataEntry.js)<br>
 [Launch Animation](ClientApp/src/components/LaunchAnimation/LaunchAnimation.js)<br>
