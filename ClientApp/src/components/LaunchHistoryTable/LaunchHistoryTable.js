@@ -42,7 +42,7 @@ const LaunchHistoryTable = ({ email }) => {
               </tr>
             </thead>
             <tbody>
-              {historyData.map((hr, i) => (
+              {historyData.reverse().map((hr, i) => (
                 <tr key={i}>
                   <td>{hr.success ? 'Yes' : 'No'}</td>
                   <td>{hr.mass}</td>

@@ -6,6 +6,24 @@ import { LaunchAnimation } from '../components/LaunchAnimation';
 import { LaunchHistoryTable } from '../components/LaunchHistoryTable';
 const axios = require('axios').default;
 
+const gravity = 9.8;
+const airResistance = 5.4;
+const beta = 0.6;
+const exhaustGasSpeed = 500;
+const t = 10;
+const heightAlgorithm = (mass, force, angle) => {
+  const C1 =
+    (-1 * exhaustGasSpeed * beta * (beta - airResistance) - gravity * mass * airResistance) /
+    (airResistance * (beta - airResistance) * Math.pow(mass, airResistance / beta));
+  const C2 = ((gravity * Math.pow(mass, 2)) / (2 * beta * (beta - airResistance))) + (C1 * Math.pow(mass, 1 + (airResistance/beta))) / (beta * (1 + (airResistance / beta)));
+  const firstPiece = ((exhaustGasSpeed * beta) / airResistance) * t;
+  const secondPiece = (gravity / (2 * beta * (beta - airResistance))) * Math.pow(mass - beta * t, 2);
+  const thirdPiece = (C1 / (beta * (1 + (airResistance / beta)))) * Math.pow(mass - (beta * t), 1 + (airResistance / beta))
+  const burnout = firstPiece - secondPiece - thirdPiece + C2;
+
+  console.log(burnout);
+};
+
 const RocketLaunchContent = ({ user, setUser, isLoggedIn, setIsLoggedIn }) => {
   const [mass, setMass] = useState(0);
   const [angle, setAngle] = useState(0);
@@ -14,6 +32,7 @@ const RocketLaunchContent = ({ user, setUser, isLoggedIn, setIsLoggedIn }) => {
   const [launchStatus, setLaunchStatus] = useState('grounded');
 
   const calculateSuccessFail = (mass, angle, force) => {
+    heightAlgorithm(mass, force, angle);
     const launchStatus = mass > 0 && angle > 0 && force > 0;
     setLaunchSuccessful(launchStatus);
     return launchStatus;
@@ -51,7 +70,7 @@ const RocketLaunchContent = ({ user, setUser, isLoggedIn, setIsLoggedIn }) => {
           </div>
           <div className="col-xs-3 col-md-5">
             <LaunchDataEntry onLaunch={onLaunch} onReset={onReset} />
-            <LaunchHistoryTable className="launch-history-table" email={user.email}/>
+            <LaunchHistoryTable className="launch-history-table" email={user.email} />
           </div>
         </div>
       )}

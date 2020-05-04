@@ -14,8 +14,8 @@ namespace rocket_launch.DataAccess
     }
     public List<HistoryRecord> GetHistoryRecords(string email)
     {
-      var thing = _context.HistoryRecords.Where(hr => hr.Email == email).ToList();
-      return thing;
+      var historyRecords = _context.HistoryRecords.Where(hr => hr.Email == email).ToList();
+      return historyRecords;
     }
     public async System.Threading.Tasks.Task<bool> RecordLaunchAsync(HistoryRecord hr)
     {
