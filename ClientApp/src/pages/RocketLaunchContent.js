@@ -15,7 +15,7 @@ const heightAlgorithm = (mass, force, angle) => {
   const C1 =
     (-1 * exhaustGasSpeed * beta * (beta - airResistance) - gravity * mass * airResistance) /
     (airResistance * (beta - airResistance) * Math.pow(mass, airResistance / beta));
-  const C2 = ((gravity * Math.pow(mass, 2)) / (2 * beta * (beta - airResistance))) + (C1 * Math.pow(mass, 1 + (airResistance/beta))) / (beta * (1 + (airResistance / beta)));
+  const C2 = ((gravity * Math.pow(mass, 2)) / (2 * beta * (beta - airResistance))) + (C1 * Math.pow(mass, 1 + (airResistance / beta))) / (beta * (1 + (airResistance / beta)));
   const firstPiece = ((exhaustGasSpeed * beta) / airResistance) * t;
   const secondPiece = (gravity / (2 * beta * (beta - airResistance))) * Math.pow(mass - beta * t, 2);
   const thirdPiece = (C1 / (beta * (1 + (airResistance / beta)))) * Math.pow(mass - (beta * t), 1 + (airResistance / beta))
@@ -46,9 +46,9 @@ const RocketLaunchContent = ({ user, setUser, isLoggedIn, setIsLoggedIn }) => {
     var success = calculateSuccessFail(mass, angle, force);
     const resp = await axios.post('history', {
       email: user.email,
-      mass: mass,
-      angle: angle,
-      force: force,
+      mass: Number(mass),
+      angle: Number(angle),
+      force: Number(force),
       success: success,
     });
     if (!resp.data) {
