@@ -24,4 +24,19 @@ Database [SQLite](https://www.sqlite.org/index.html)<br>
 5. *Full list of projects used in the Client Side application can be found in the **package.json** file<br>
 Many of these are similar to a using statement(libraries) in C# (think newtonsoft) or a library in Java*
 
+### Controllers (C#)
+[History Controller](Controllers/HistoryController.cs)<br>
+[Login Controller](Controllers/LoginController.cs)
+### Data Access/Database Files (C#)
+[User History Data Access](DataAccess/UserHistoryRepository.cs)<br>
+[User Profile Data Access](DataAccess/UserProfileRepository.cs)<br>
+[Class to Build Database - not included in SDD](Models/RocketLauncherContext.cs)<br>
+### C# Objects
+[History Record Object](Models/HistoryRecord.cs)<br>
+[User Profile Object](Models/UserProfile.cs)<br>
+### GUI Interface files (React js)
+[Login Component](ClientApp/src/components/login/Login.js)<br>
+[Launch History Table](ClientApp/src/components/LaunchHistoryTable/LaunchHistoryTable.js)<br>
+[Launch Data Entry](ClientApp/src/components/LaunchDataEntry/LaunchDataEntry.js)<br>
+[Launch Animation](ClientApp/src/components/LaunchAnimation/LaunchAnimation.js)<br>
 
