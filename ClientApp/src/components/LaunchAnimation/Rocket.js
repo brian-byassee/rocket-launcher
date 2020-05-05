@@ -7,16 +7,15 @@ import { faRocket } from "@fortawesome/free-solid-svg-icons";
 
 const Rocket = ({ width, height, launchSuccessful, launchStatus }) => {
   const successProps = useSpring({
+    config: { duration: 1000 },
     to: async (next, cancel) => {
       await next({
-        duration: 1000,
         position: "absolute",
         bottom: 350,
         left: 350,
         transform: "rotate(45deg)"
       });
       await next({
-        duration: 2000,
         position: "absolute",
         bottom: 450,
         left: 450,
@@ -24,7 +23,6 @@ const Rocket = ({ width, height, launchSuccessful, launchStatus }) => {
       });
     },
     from: {
-      duration: 2000,
       position: "absolute",
       bottom: 300,
       left: 300,
