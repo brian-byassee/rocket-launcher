@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Formik, Field } from 'formik';
 import { Button, Col, Row } from 'reactstrap';
+import Footer from './Footer';
 import { TextField } from '@material-ui/core';
 import * as Yup from 'yup';
 
@@ -82,112 +83,115 @@ const Login = ({ setIsLoggedIn, setUser }) => {
   };
 
   return (
-    <Formik
-      initialValues={{
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: '',
-        passwordConfirm: '',
-        userName: '',
-        createAccount: createAccount.isNew,
-      }}
-      onSubmit={handleSubmit}
-      validationSchema={loginValidation}
-    >
-      {({ handleSubmit, errors, touched, setFieldValue }) => (
-        <form onSubmit={handleSubmit}>
-          <Row className="justify-content-md-center">
-            <div className="input-fields">
-              <Field id="email" name="email">
-                {({ field }) => (
-                  <TextField
-                    {...field}
-                    label="Email"
-                    helperText={touched.email ? errors.email : ''}
-                    error={errors.email && Boolean(touched.email)}
-                    variant="outlined"
-                  />
+    <div className="Login">
+      <Formik
+        initialValues={{
+          firstName: '',
+          lastName: '',
+          email: '',
+          password: '',
+          passwordConfirm: '',
+          userName: '',
+          createAccount: createAccount.isNew,
+        }}
+        onSubmit={handleSubmit}
+        validationSchema={loginValidation}
+      >
+        {({ handleSubmit, errors, touched, setFieldValue }) => (
+          <form onSubmit={handleSubmit}>
+            <Row className="justify-content-md-center">
+              <div className="input-fields">
+                <Field id="email" name="email">
+                  {({ field }) => (
+                    <TextField
+                      {...field}
+                      label="Email"
+                      helperText={touched.email ? errors.email : ''}
+                      error={errors.email && Boolean(touched.email)}
+                      variant="outlined"
+                    />
+                  )}
+                </Field>
+                <Field id="password" name="password">
+                  {({ field }) => (
+                    <TextField
+                      {...field}
+                      label="Password"
+                      type="password"
+                      helperText={touched.password ? errors.password : ''}
+                      error={errors.password && Boolean(touched.password)}
+                      variant="outlined"
+                    />
+                  )}
+                </Field>
+                {createAccount.isNew && (
+                  <React.Fragment>
+                    <Field id="passwordConfirm" name="passwordConfirm">
+                      {({ field }) => (
+                        <TextField
+                          {...field}
+                          label="Confirm Password"
+                          type="password"
+                          helperText={touched.passwordConfirm ? errors.passwordConfirm : ''}
+                          error={errors.passwordConfirm && Boolean(touched.passwordConfirm)}
+                          variant="outlined"
+                        />
+                      )}
+                    </Field>
+                    <Field id="firstName" name="firstName">
+                      {({ field }) => (
+                        <TextField
+                          {...field}
+                          label="First Name"
+                          helperText={touched.firstName ? errors.firstName : ''}
+                          error={errors.firstName && Boolean(touched.firstName)}
+                          variant="outlined"
+                        />
+                      )}
+                    </Field>
+                    <Field id="lastName" name="lastName">
+                      {({ field }) => (
+                        <TextField
+                          {...field}
+                          label="Last Name"
+                          helperText={touched.lastName ? errors.lastName : ''}
+                          error={errors.lastName && Boolean(touched.lastName)}
+                          variant="outlined"
+                        />
+                      )}
+                    </Field>
+                    <Field id="userName" name="userName">
+                      {({ field }) => (
+                        <TextField
+                          {...field}
+                          helperText={touched.userName ? errors.userName : ''}
+                          error={errors.userName && Boolean(touched.userName)}
+                          variant="outlined"
+                          label="User Name"
+                        />
+                      )}
+                    </Field>
+                  </React.Fragment>
                 )}
-              </Field>
-              <Field id="password" name="password">
-                {({ field }) => (
-                  <TextField
-                    {...field}
-                    label="Password"
-                    type="password"
-                    helperText={touched.password ? errors.password : ''}
-                    error={errors.password && Boolean(touched.password)}
-                    variant="outlined"
-                  />
-                )}
-              </Field>
-              {createAccount.isNew && (
-                <React.Fragment>
-                  <Field id="passwordConfirm" name="passwordConfirm">
-                    {({ field }) => (
-                      <TextField
-                        {...field}
-                        label="Confirm Password"
-                        type="password"
-                        helperText={touched.passwordConfirm ? errors.passwordConfirm : ''}
-                        error={errors.passwordConfirm && Boolean(touched.passwordConfirm)}
-                        variant="outlined"
-                      />
-                    )}
-                  </Field>
-                  <Field id="firstName" name="firstName">
-                    {({ field }) => (
-                      <TextField
-                        {...field}
-                        label="First Name"
-                        helperText={touched.firstName ? errors.firstName : ''}
-                        error={errors.firstName && Boolean(touched.firstName)}
-                        variant="outlined"
-                      />
-                    )}
-                  </Field>
-                  <Field id="lastName" name="lastName">
-                    {({ field }) => (
-                      <TextField
-                        {...field}
-                        label="Last Name"
-                        helperText={touched.lastName ? errors.lastName : ''}
-                        error={errors.lastName && Boolean(touched.lastName)}
-                        variant="outlined"
-                      />
-                    )}
-                  </Field>
-                  <Field id="userName" name="userName">
-                    {({ field }) => (
-                      <TextField
-                        {...field}
-                        helperText={touched.userName ? errors.userName : ''}
-                        error={errors.userName && Boolean(touched.userName)}
-                        variant="outlined"
-                        label="User Name"
-                      />
-                    )}
-                  </Field>
-                </React.Fragment>
-              )}
-              <Row className="button-row">
-                <Col md="6">
-                  <Button size="lg" color="secondary" onClick={() => handleSwitch(setFieldValue)} block>
-                    {createAccount.switch}
-                  </Button>
-                </Col>
-                <Col md="6">
-                  <Button size="lg" className="submit-button" type="submit" color="primary" block>
-                    {createAccount.submit}
-                  </Button>
-                </Col>
-              </Row>
-            </div>
-          </Row>
-        </form>
-      )}
-    </Formik>
+                <Row className="button-row">
+                  <Col md="6">
+                    <Button size="lg" color="secondary" onClick={() => handleSwitch(setFieldValue)} block>
+                      {createAccount.switch}
+                    </Button>
+                  </Col>
+                  <Col md="6">
+                    <Button size="lg" className="submit-button" type="submit" color="primary" block>
+                      {createAccount.submit}
+                    </Button>
+                  </Col>
+                </Row>
+              </div>
+            </Row>
+          </form>
+        )}
+      </Formik>
+      <Footer />
+    </div>
   );
 };
 
