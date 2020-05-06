@@ -5,139 +5,61 @@ import { useSpring, animated } from 'react-spring';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRocket } from "@fortawesome/free-solid-svg-icons";
 
-const Rocket = ({ width, height, launchSuccessful, launchStatus }) => {
-  const successProps = useSpring({
-    config: { duration: 500 },
-    to: async (next, cancel) => {
-      await next({
-        position: "absolute",
-        bottom: 325,
-        left: 325,
-        transform: "rotate(45deg)"
-      });
-      await next({
-        position: "absolute",
-        bottom: 350,
-        left: 350,
-      });
-      await next({
-        position: "absolute",
-        bottom: 375,
-        left: 375,
-      });
-      await next({
-        position: "absolute",
-        bottom: 400,
-        left: 400,
-      });
-      await next({
-        position: "absolute",
-        bottom: 425,
-        left: 425,
-      });
-      await next({
-        position: "absolute",
-        bottom: 450,
-        left: 450,
-        transform: "rotate(90deg)"
-      });
-      await next({
-        position: "absolute",
-        bottom: 425,
-        left: 455,
-        transform: "rotate(95deg)"
-      });
-      await next({
-        position: "absolute",
-        bottom: 400,
-        left: 460,
-        transform: "rotate(100deg)"
-      });
-      await next({
-        position: "absolute",
-        bottom: 375,
-        left: 465,
-        transform: "rotate(110deg)"
-      });
-      await next({
-        position: "absolute",
-        bottom: 350,
-        left: 475,
-        transform: "rotate(120deg)"
-      });
-      await next({
-        position: "absolute",
-        bottom: 325,
-        left: 475,
-        transform: "rotate(130deg)"
-      });
-      await next({
-        position: "absolute",
-        bottom: 300,
-        left: 465,
-        transform: "rotate(135deg)"
-      });
-      await next({
-        position: "absolute",
-        bottom: 275,
-        left: 460,
-        transform: "rotate(140deg)"
-      });
-      await next({
-        position: "absolute",
-        bottom: 250,
-        left: 455,
-        transform: "rotate(145deg)"
-      });
-    },
-    from: {
-      position: "absolute",
-      bottom: 300,
-      left: 300,
-      transform: "rotate(45deg)"
-    }
+const MAX_T = 4000; // total time of flight
+const PADDING = 30; // page padding
+const REVOLUTIONS = 2; // Number of times to orbit
+const ICON_ROTATION_OFFSET = 44; // corrects for SVG Icon's inherit rotation
+
+const RADIAL_REVOLUTION = 2 * Math.PI;
+const RADIAN_TO_DEGREE_FACTOR = 180 / Math.PI;
+
+const sin = t => Math.sin((t / MAX_T) * REVOLUTIONS * RADIAL_REVOLUTION);
+const cos = t => Math.cos((t / MAX_T) * REVOLUTIONS * RADIAL_REVOLUTION);
+const tan = t => Math.tan((t / MAX_T) * REVOLUTIONS * RADIAL_REVOLUTION);
+
+const RocketLaunch = ({ width, height, launchSuccessful }) => {
+  const xOffset = width / 2;
+  const yOffset = height / 2;
+  const maxAmplitude = Math.min(xOffset - PADDING, yOffset - PADDING);
+  const destination = launchSuccessful ? Math.PI / 2 : Math.PI;
+  const amplitude = t => maxAmplitude * Math.sin(t / MAX_T * destination);
+
+  const { maxT } = useSpring({
+    config: { duration: MAX_T },
+    from: { maxT: 600 },
+    maxT: MAX_T
   });
 
-  const failureProps = useSpring({
-    config: { duration: 1000 },
-    to: async (next, cancel) => {
-      await next({
-        position: "absolute",
-        bottom: 100,
-        left: 100,
-        transform: "rotate(45deg)"
-      });
-      await next({
-        position: "absolute",
-        bottom: 200,
-        left: 300,
-        transform: "rotate(90deg)"
-      });
-      await next({
-        position: "absolute",
-        bottom: 300,
-        left: 300,
-        transform: "rotate(90deg)"
-      });
-    },
-    from: {
-      position: "absolute",
-      bottom: 300,
-      left: 300,
-      transform: "rotate(45deg)"
-    }
-  });
+  const style = {
+    left: maxT.interpolate(
+      t => (amplitude(t) * sin(t) + xOffset) + "px"
+    ),
+    top: maxT.interpolate(
+      t => (amplitude(t) * cos(t) + yOffset) + "px"
+    ),
+    transform: maxT.interpolate(t => {
+      const quadrantOffset = cos(t) < 0 ? 180 : 0;
+      const atanDegrees = -1 * Math.atan(tan(t)) * RADIAN_TO_DEGREE_FACTOR;
+      return `rotate(${atanDegrees + quadrantOffset + ICON_ROTATION_OFFSET}deg)`;
+    })
+  };
+
+  return (
+    <animated.div style={style} className="launched-rocket">
+      <FontAwesomeIcon icon={faRocket} />
+    </animated.div>
+  )
+}
+
+const Rocket = ({ width, height, launchSuccessful, launchStatus }) => {
+
 
   return (
     <div className="Rocket" >
       {launchStatus === 'grounded' && <div className="grounded-rocket"><FontAwesomeIcon icon={faRocket} /></div>}
       {
         launchStatus === 'launched' && (
-          <animated.div style={launchSuccessful ? successProps : failureProps}>
-            <div className="launched-rocket">
-              <FontAwesomeIcon icon={faRocket} />
-            </div>
-          </animated.div>
+          <RocketLaunch width={width} height={height} launchSuccessful={launchSuccessful} />
         )
       }
     </div >

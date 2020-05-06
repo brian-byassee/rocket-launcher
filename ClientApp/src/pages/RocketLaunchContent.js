@@ -55,7 +55,7 @@ const RocketLaunchContent = ({ user, setUser, isLoggedIn, setIsLoggedIn }) => {
       force: Number(force),
       success: success,
     });
-    // setTimeout(() => setAnimating(false), 3000);
+    setAnimating(false);
     if (!resp.data) {
       alert('failed to save rocket launch data!');
     }
