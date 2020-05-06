@@ -20,6 +20,7 @@ const LaunchDataEntry = ({ onLaunch, onReset }) => (
                 label="Mass"
                 helperText={touched.mass ? errors.mass : ''}
                 error={errors.mass && Boolean(touched.mass)}
+                autoComplete="off"
                 variant="outlined"
               />
             )}
@@ -31,6 +32,7 @@ const LaunchDataEntry = ({ onLaunch, onReset }) => (
                 label="Angle"
                 helperText={touched.angle ? errors.angle : ''}
                 error={errors.angle && Boolean(touched.angle)}
+                autoComplete="off"
                 variant="outlined"
               />
             )}
@@ -42,6 +44,7 @@ const LaunchDataEntry = ({ onLaunch, onReset }) => (
                 label="Force"
                 helperText={touched.force ? errors.force : ''}
                 error={errors.force && Boolean(touched.force)}
+                autoComplete="off"
                 variant="outlined"
               />
             )}

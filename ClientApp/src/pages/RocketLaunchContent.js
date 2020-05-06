@@ -55,12 +55,11 @@ const RocketLaunchContent = ({ user, setUser, isLoggedIn, setIsLoggedIn }) => {
       force: Number(force),
       success: success,
     });
-    setTimeout(() => setAnimating(false), 1000);
+    // setTimeout(() => setAnimating(false), 3000);
     if (!resp.data) {
       alert('failed to save rocket launch data!');
     }
     setLaunchStatus('launched');
-    console.log('Rocket has launched....');
   };
 
   const onReset = () => setLaunchStatus('grounded');
