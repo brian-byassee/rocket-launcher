@@ -20,7 +20,7 @@ Database [SQLite](https://www.sqlite.org/index.html)<br>
 1. Help created cool UI - [@material-ui/core](https://material-ui.com/) and [Bootstrap](https://getbootstrap.com/)<br>
 2. Help handle form state - [Formik](https://jaredpalmer.com/formik/)<br>
 3. Help handle form validation - [Yup](https://github.com/jquense/yup)<br>
-4. Animation - [react-virtualized-auto-sizer](https://github.com/bvaughn/react-virtualized-auto-sizer)<br>
+4. Animation - [Spring](https://www.react-spring.io/)<br>
 5. *Full list of projects used in the Client Side application can be found in the **package.json** file<br>
 Many of these are similar to a using statement(libraries) in C# (think newtonsoft) or a library in Java*
 
